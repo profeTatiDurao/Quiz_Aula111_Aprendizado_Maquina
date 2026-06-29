@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Quiz - Aprendizado de Máquina com Imagens</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e2f;
+            color: #f0f0f0;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: #2b2b3d;
+            padding: 30px;
+            width: 680px;
+            margin: auto;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            color: #a5b4fc;
+        }
+
+        .subtitulo {
+            font-size: 0.95rem;
+            color: #cccccc;
+            margin-bottom: 25px;
+        }
+
+        .pergunta {
+            text-align: left;
+            margin-bottom: 20px;
+            padding: 12px;
+            border-left: 3px solid #a5b4fc;
+            background-color: #242436;
+            border-radius: 6px;
+        }
+
+        .pergunta p {
+            font-weight: bold;
+        }
+
+        code {
+            color: #a5b4fc;
+            background-color: #1e1e2f;
+            padding: 2px 5px;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #a5b4fc;
+            color: #1e1e2f;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #818cf8;
+            transform: translateY(-2px);
+        }
+
+        #resultado {
+            font-weight: bold;
+            margin-top: 20px;
+            color: #a5b4fc;
+        }
+
+        #linkRespostas {
+            margin-top: 15px;
+            word-break: break-all;
+        }
+
+        #linkRespostas a {
+            color: #a5b4fc;
+            font-weight: bold;
+        }
+
+        .correto {
+            color: #00ff7f;
+            font-weight: bold;
+        }
+
+        .errado {
+            color: #ff4040;
+            font-weight: bold;
+        }
+
+        .neutro {
+            color: #ffd166;
+            font-weight: bold;
+        }
+
+        @media (max-width: 720px) {
+            .container {
+                width: 90%;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Quiz - Aprendizado de Máquina com Imagens</h1>
+
+        <p class="subtitulo">
+            Responda às perguntas sobre classes, etiquetas, conjunto de dados, pré-processamento e aumento de imagens no Colab.
+        </p>
+
+        <form id="quizForm">
+
+            <div class="pergunta" id="q1box">
+                <p>1) Na aula, o conjunto de imagens foi organizado em classes como “infectado” e “não infectado”. Em aprendizado de máquina, qual é o papel das classes?</p>
+
+                <label>
+                    <input type="radio" name="q1" value="a">
+                    São nomes das categorias que o modelo deve aprender a identificar nas imagens
+                </label><br>
+
+                <label>
+                    <input type="radio" name="q1" value="b">
+                    São apenas os nomes dos arquivos salvos no computador
+                </label><br>
+
+                <label>
+                    <input type="radio" name="q1" value="c">
+                    São comandos usados para instalar bibliotecas no Colab
+                </label><br>
+
+                <label>
+                    <input type="radio" name="q1" value="d">
+                    São filtros visuais aplicados automaticamente pelo navegador
+                </label>
+            </div>
+
+            <div class="pergunta" id="q2box">
+                <p>2) O notebook explica que as etiquetas são números associados às classes. Por que isso é importante para o modelo?</p>
+
+                <label>
+                    <input type="radio" name="q2" value="a">
+                    Porque o modelo só consegue abrir imagens se elas tiverem nomes numéricos
+                </label><br>
+
+                <label>
+                    <input type="radio" name="q2" value="b">
+                    Porque as etiquetas substituem completamente a necessidade das imagens
+                </label><br>
+
+                <label>
+                    <input type="radio" name="q2" value="c">
+                    Porque algoritmos trabalham melhor com representações numéricas das categorias
+                </label><br>
+
+                <label>
+                    <input type="radio" name="q2" value="d">
+                    Porque etiquetas servem apenas para mudar a cor das imagens no gráfico
+                </label>
+            </div>
+
+            <div class="pergunta" id="q3box">
+                <p>3) A aula separa o conjunto de dados em treinamento, validação e teste. Qual alternativa interpreta melhor essa divisão?</p>
+
+                <label>
+                    <input type="radio" name="q3" value="a">
+                    Treinamento, validação e teste são três nomes diferentes para exatamente a mesma pasta
+                </label><br>
+
+                <label>
+                    <input type="radio" name="q3" value="b">
+                    Treinamento ensina o modelo, validação acompanha o desempenho durante o treino e teste avalia o modelo em dados separados
+                </label><br>
+
+                <label>
+                    <input type="radio" name="q3" value="c">
+                    A pasta de teste é usada primeiro, e a de treinamento só aparece depois da previsão final
+                </label><br>
+
+                <label>
+                    <input type="radio" name="q3" value="d">
+                    Validação serve para apagar imagens ruins automaticamente
+                </label>
+            </div>
+
+            <div class="pergunta" id="q4box">
+                <p>4) No pré-processamento, a aula cita ações como converter imagens em arrays, mapear etiquetas e aumentar imagens. O que significa converter uma imagem em array?</p>
+
+                <label>
+                    <input type="radio" name="q4" value="a">
+                    Transformar a imagem em um texto com a descrição do que aparece nela
+                </label><br>
+
+                <label>
+                    <input type="radio" name="q4" value="b">
+                    Transformar a imagem em um arquivo de áudio para o TensorFlow entender
+                </label><br>
+
+                <label>
+                    <input type="radio" name="q4" value="c">
+                    Transformar a imagem em uma sequência de valores numéricos que representam seus pixels
+                </label><br>
+
+                <label>
+                    <input type="radio" name="q4" value="d">
+                    Transformar a imagem em um link da internet
+                </label>
+            </div>
+
+            <div class="pergunta" id="q5box">
+                <p>5) O código usa <code>ImageDataGenerator</code> com técnicas como rotação e deslocamento de largura. Qual é o objetivo do aumento de dados?</p>
+
+                <label>
+                    <input type="radio" name="q5" value="a">
+                    Deixar as imagens mais bonitas apenas para apresentação visual
+                </label><br>
+
+                <label>
+                    <input type="radio" name="q5" value="b">
+                    Gerar variações das imagens para ajudar o modelo a aprender melhor e não depender de exemplos sempre iguais
+                </label><br>
+
+                <label>
+                    <input type="radio" name="q5" value="c">
+                    Trocar automaticamente as classes “infectado” e “não infectado”
+                </label><br>
+
+                <label>
+                    <input type="radio" name="q5" value="d">
+                    Remover a necessidade de treinar o modelo
+                </label>
+            </div>
+
+            <button type="button" onclick="corrigir()">Enviar Respostas</button>
+
+        </form>
+
+        <p id="resultado"></p>
+
+        <p id="linkRespostas"></p>
+
+    </div>
+
+    <script>
+        function corrigir() {
+            const respostasCorretas = {
+                q1: "a",
+                q2: "c",
+                q3: "b",
+                q4: "c",
+                q5: "b"
+            };
+
+            let pontos = 0;
+            const total = Object.keys(respostasCorretas).length;
+            const form = document.getElementById("quizForm");
+
+            let params = [];
+
+            for (const q in respostasCorretas) {
+                const box = document.getElementById(q + "box");
+
+                const antigo = box.querySelector(".feedback");
+                if (antigo) antigo.remove();
+
+                const marcado = form.querySelector(`input[name="${q}"]:checked`);
+
+                const respostaAluno = marcado ? marcado.value : "nao_respondeu";
+
+                const acertou = respostaAluno === respostasCorretas[q];
+
+                if (acertou) {
+                    pontos++;
+                }
+
+                params.push(`${q}=${respostaAluno}`);
+                params.push(`${q}_status=${acertou ? "correto" : "errado"}`);
+
+                const feedback = document.createElement("p");
+                feedback.classList.add("feedback");
+
+                if (respostaAluno === "nao_respondeu") {
+                    feedback.textContent = "⚠️ Você não marcou nenhuma alternativa.";
+                    feedback.classList.add("neutro");
+                } else if (acertou) {
+                    feedback.textContent = "✅ Correto!";
+                    feedback.classList.add("correto");
+                } else {
+                    let respostaCorretaTexto = "";
+
+                    const inputs = box.querySelectorAll("label input");
+
+                    inputs.forEach(input => {
+                        if (input.value === respostasCorretas[q]) {
+                            respostaCorretaTexto = input.parentNode.textContent.trim();
+                        }
+                    });
+
+                    feedback.textContent = `❌ Errado. A resposta correta é: ${respostaCorretaTexto}`;
+                    feedback.classList.add("errado");
+                }
+
+                box.appendChild(feedback);
+            }
+
+            document.getElementById("resultado").textContent =
+                `Você acertou ${pontos} de ${total} questões.`;
+
+            params.push(`pontos=${pontos}`);
+            params.push(`total=${total}`);
+
+            const urlBase = window.location.origin + window.location.pathname;
+            const link = urlBase + "?" + params.join("&");
+
+            document.getElementById("linkRespostas").innerHTML =
+                `🔗 Link com respostas e status:<br><a href="${link}" target="_blank">${link}</a>`;
+        }
+    </script>
+
+</body>
+
+</html>
